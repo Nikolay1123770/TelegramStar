@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Stars Shop</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>⭐ Stars Shop</h1>
+                <p class="subtitle">Покупайте Telegram Stars выгодно</p>
+            </div>
+        </header>
+
+        <!-- User Info -->
+        <div class="user-card" id="userCard">
+            <div class="user-avatar" id="userAvatar">👤</div>
+            <div class="user-info">
+                <div class="user-name" id="userName">Загрузка...</div>
+                <div class="user-stats" id="userStats">Всего покупок: 0</div>
+            </div>
+        </div>
+
+        <!-- Packages Section -->
+        <section class="packages-section">
+            <h2 class="section-title">🛒 Выберите пакет</h2>
+            <div class="packages-grid" id="packagesGrid">
+                <!-- Packages will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <h2 class="section-title">✨ Почему мы?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Мгновенно</div>
+                    <div class="feature-desc">Звёзды приходят сразу после оплаты</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Безопасно</div>
+                    <div class="feature-desc">Официальные платежи Telegram</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <div class="feature-title">Бонусы</div>
+                    <div class="feature-desc">Дополнительные звёзды к пакетам</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-title">Поддержка</div>
+                    <div class="feature-desc">Помощь 24/7</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" data-tab="shop">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-label">Магазин</span>
+            </button>
+            <button class="nav-btn" data-tab="history">
+                <span class="nav-icon">📦</span>
+                <span class="nav-label">Покупки</span>
+            </button>
+            <button class="nav-btn" data-tab="support">
+                <span class="nav-icon">💬</span>
+                <span class="nav-label">Поддержка</span>
+            </button>
+            <button class="nav-btn" data-tab="info">
+                <span class="nav-icon">ℹ️</span>
+                <span class="nav-label">Инфо</span>
+            </button>
+        </nav>
+
+        <!-- History Tab (hidden by default) -->
+        <section class="tab-content" id="historyTab" style="display: none;">
+            <h2 class="section-title">📦 История покупок</h2>
+            <div class="history-list" id="historyList">
+                <div class="empty-state">
+                    <div class="empty-icon">📭</div>
+                    <div class="empty-text">У вас пока нет покупок</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Support Tab (hidden by default) -->
+        <section class="tab-content" id="supportTab" style="display: none;">
+            <h2 class="section-title">💬 Поддержка</h2>
+            <div class="support-content">
+                <div class="support-card">
+                    <h3>Связаться с нами</h3>
+                    <p>Если у вас есть вопросы или проблемы, мы всегда готовы помочь!</p>
+                    <button class="support-btn" id="supportBtn">
+                        💬 Написать в поддержку
+                    </button>
+                </div>
+                <div class="faq-section">
+                    <h3>FAQ</h3>
+                    <div class="faq-item">
+                        <div class="faq-question">Как быстро приходят звёзды?</div>
+                        <div class="faq-answer">Моментально после оплаты.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Безопасна ли оплата?</div>
+                        <div class="faq-answer">Да, мы используем официальные Telegram Payments.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">Есть ли ограничения?</div>
+                        <div class="faq-answer">Нет ограничений на количество покупок.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Info Tab (hidden by default) -->
+        <section class="tab-content" id="infoTab" style="display: none;">
+            <h2 class="section-title">ℹ️ Информация</h2>
+            <div class="info-content">
+                <div class="info-card" id="privacyCard">
+                    <div class="info-icon">📜</div>
+                    <div class="info-text">Политика конфиденциальности</div>
+                    <div class="info-arrow">→</div>
+                </div>
+                <div class="info-card" id="termsCard">
+                    <div class="info-icon">📋</div>
+                    <div class="info-text">Пользовательское соглашение</div>
+                    <div class="info-arrow">→</div>
+                </div>
+                <div class="info-card" id="aboutCard">
+                    <div class="info-icon">⭐</div>
+                    <div class="info-text">О сервисе</div>
+                    <div class="info-arrow">→</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">Заголовок</h3>
+                    <button class="modal-close" id="modalClose">✕</button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Modal content -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
