@@ -1,40 +1,27 @@
-import asyncio
 import logging
-from aiogram import Bot, Dispatcher
-from aiogram.enums import ParseMode
-from aiogram.client.default import DefaultBotProperties
+from aiogram import Bot, Dispatcher, executor
+from aiogram.types import ParseMode
 
 from bot.config import BOT_TOKEN
-from bot.handlers import routers
 from bot.database.db import db
 
+# Логирование
+logging.basicConfig(level=logging.INFO)
 
-async def main():
-    # Настройка логирования
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
-    
-    # Инициализация базы данных
+# Инициализация
+bot = Bot(token=BOT_TOKEN, parse_mode=ParseMode.HTML)
+dp = Dispatcher(bot)
+
+# Импорт и регистрация хендлеров
+from bot.handlers.start import router as start_router
+from bot.handlers.purchase import router as purchase_router  
+from bot.handlers.support import router as support_router
+
+
+async def on_startup(_):
     await db.init()
-    
-    # Создание бота и диспетчера
-    bot = Bot(
-        token=BOT_TOKEN,
-        default=DefaultBotProperties(parse_mode=ParseMode.HTML)
-    )
-    dp = Dispatcher()
-    
-    # Регистрация роутеров
-    for router in routers:
-        dp.include_router(router)
-    
-    # Запуск бота
-    logging.info("Bot starting...")
-    await bot.delete_webhook(drop_pending_updates=True)
-    await dp.start_polling(bot)
+    logging.info("Bot started!")
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    executor.start_polling(dp, on_startup=on_startup, skip_updates=True)
