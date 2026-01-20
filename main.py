@@ -11,7 +11,7 @@ from aiogram.enums import ParseMode
 # ============================================
 # КОНФИГУРАЦИЯ
 # ============================================
-BOT_TOKEN = os.getenv("BOT_TOKEN", "YOUR_BOT_TOKEN")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "8557420124:AAFuZfN5E1f0-qH-cIBSqI9JK309R6s88Q8")
 WEBAPP_PORT = int(os.getenv("PORT", 3000))
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
